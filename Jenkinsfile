@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/mohithhp001/your-private-repo.git', credentialsId: 'github-credentials'
+                git branch: 'main', url: 'https://github.com/mohithhp001/app_AI.git', credentialsId: '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'
             }
         }
 
