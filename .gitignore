@@ -1,0 +1,73 @@
+# Node.js (Frontend)
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.cache
+frontend/build
+frontend/dist
+frontend/node_modules
+
+# Python environment (Backend and AI service)
+__pycache__/
+*.pyc
+*.pyc
+.env
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+
+# Docker
+docker-compose.override.yml
+*.dockerignore
+docker-compose.override.yaml
+
+# Local data folders
+redis_data/
+database/postgres_data/
+
+# Mac specific
+.DS_Store
+
+# IDE settings
+.vscode/
+.idea/
+.vscode/
+
+# Python compiled files
+*.pyc
+*.pyo
+
+# Node Modules
+frontend/node_modules
+frontend/dist/
+frontend/.vite
+frontend/.cache
+frontend/build/
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Test outputs
+coverage.xml
+pytest_cache/
+.mypy_cache/
+
+# Temporary and cache files
+*.swp
+*.swo
+
+# Model files and artifacts (if you plan to store locally)
+*.h5
+*.pth
+*.pkl
+*.joblib
+
+# Uploaded or generated images (if stored temporarily)
+uploads/
+temp_images/

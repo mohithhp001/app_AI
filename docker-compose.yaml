@@ -1,0 +1,53 @@
+version: '3.8'
+
+networks:
+  qc-network:
+    driver: bridge
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    networks:
+      - qc-network
+    depends_on:
+      - redis
+      - postgres
+      - ai_service
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - qc-network
+
+  ai_service:
+    build: ./ai_service
+    networks:
+      - qc-network
+    ports:
+      - "5001:5001"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - qc-network
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: qcdb
+    volumes:
+      - ./database/postgres_data:/var/lib/postgresql/data
+    networks:
+      - qc-network
