@@ -4,11 +4,11 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/mohithhp001/app_AI.git', credentialsId: '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'
+                git branch: 'main', url: 'https://github.com/mohithhp001/app_AI.git', credentialsId: 'github-credentials'
             }
         }
 
-        stage('Docker Build & Deploy') {
+        stage('Docker Build & Run') {
             steps {
                 sh 'docker-compose down'
                 sh 'docker-compose build --no-cache'
@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Testing Services') {
+        stage('Test Services') {
             steps {
                 sh 'sleep 10'
                 sh 'curl --fail http://localhost:3000 || exit 1'
