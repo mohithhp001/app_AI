@@ -2,27 +2,36 @@ pipeline {
     agent any
 
     stages {
-        stage('🚧 Checkout') {
+        stage('Checkout Code') {
             steps {
-                checkout scm
+                git branch: 'main', url: 'https://github.com/mohithhp001/your-private-repo.git', credentialsId: 'github-credentials'
             }
         }
 
-        stage('🐋 Docker Build') {
-          steps {
-              sh 'docker-compose down'
-              sh 'docker-compose build --no-cache'
-              sh 'docker-compose up -d'
-          }
-      }
+        stage('Docker Build & Deploy') {
+            steps {
+                sh 'docker-compose down'
+                sh 'docker-compose build --no-cache'
+                sh 'docker-compose up -d'
+            }
+        }
 
-      stage('🧪 Automated Tests') {
-          steps {
-              sh 'sleep 10'  // Allow services time to start clearly
-              sh 'curl --fail http://localhost:3000'
-              sh 'curl --fail http://localhost:8000/docs'
-              sh 'curl --fail http://localhost:5001/docs'
-          }
-      }
-  }
+        stage('Testing Services') {
+            steps {
+                sh 'sleep 10'
+                sh 'curl --fail http://localhost:3000 || exit 1'
+                sh 'curl --fail http://localhost:8000/docs || exit 1'
+                sh 'curl --fail http://localhost:5001/docs || exit 1'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build and Deployment Successful!'
+        }
+        failure {
+            echo '❌ Build or Deployment Failed!'
+        }
+    }
 }
