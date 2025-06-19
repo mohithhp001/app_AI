@@ -90,8 +90,8 @@ docker-compose logs ai_service
 Your git user details:
 
 ```bash
-git config --global user.name "mohithhp"
-git config --global user.email "mohithhp@example.com"
+git config --global user.name "name"
+git config --global user.email "nmae@example.com"
 ```
 
 ## 📌 Development Workflow
